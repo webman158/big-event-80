@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Document</title>
+</head>
+
+<body>
+    <button class="set">存储数据</button>
+    <button class="get">获取数据</button>
+    <script>
+        // 获取元素
+        let setBtn = document.querySelector(".set");
+        let getBtn = document.querySelector(".get");
+
+        // 数组 ==> 需求： 把数组给本地永久存储
+        let info = [
+            {id: 1, name: "lw", age: 19},
+            {id: 2, name: "xm", age: 20},
+            {id: 3, name: "xhei", age: 22},
+        ];
+
+        // localStorage 存储数据
+        setBtn.onclick = function () {
+            // 以下写法是错误的，因为本地存储只能存储字符串，所以千万不要直接存储数组和对象，这样会丢失数据的原始信息
+            // localStorage.setItem("arr", info);
+
+            // 需要将其 info 转成json字符串 ==> JSON.stringify();
+            localStorage.setItem("arr", JSON.stringify(info));
+        }
+
+        // 获取数据
+        getBtn.onclick = function () {
+
+            // 存储的是json字符串，获取的是就是json字符串
+            let jsonStr = localStorage.getItem("arr");
+
+            console.log(jsonStr);
+
+            // 还需要将json字符串反序列化成js对象
+            console.log(JSON.parse(jsonStr));
+
+        }
+    </script>
+</body>
+
+</html>
