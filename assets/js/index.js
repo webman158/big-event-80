@@ -1,5 +1,6 @@
 // 发送ajax请求获取到用户信息 ==> 渲染名字、头像
 
+// getUserInfo 必须是全局函数
 getUserInfo();
 function getUserInfo() {
   axios
@@ -54,7 +55,7 @@ $(function () {
   // layer的处理
   let layer = layui.layer;
 
-  // 退出功能
+  // ================ 退出功能 ================
   $("#btnLogout").click(function () {
     // 弹出询问框
     layer.confirm("确定退出吗?", { icon: 3, title: "提示" }, function (index) {
