@@ -54,29 +54,27 @@ $(function () {
     let data = $(this).serialize();
 
     // 发送ajax请求 jQ的$.ajax() 或者  axios
-    axios
-      .post("http://ajax.frontend.itheima.net/api/reguser", data)
-      .then(function (res) {
-        // console.log(res); // 服务器响应的结果是在 res.data
+    axios.post("/api/reguser", data).then(function (res) {
+      // console.log(res); // 服务器响应的结果是在 res.data
 
-        if (res.data.status !== 0) {
-          // 注册失败
-          // return alert("注册失败");
-          // return alert(res.data.message);
-          return layer.msg(res.data.message);
-        }
+      if (res.data.status !== 0) {
+        // 注册失败
+        // return alert("注册失败");
+        // return alert(res.data.message);
+        return layer.msg(res.data.message);
+      }
 
-        // 注册成功
-        // 1. 弹框提示用户
-        // 2. 去显示登录界面
+      // 注册成功
+      // 1. 弹框提示用户
+      // 2. 去显示登录界面
 
-        // 1.
-        // alert("注册成功");
-        layer.msg("注册成功");
+      // 1.
+      // alert("注册成功");
+      layer.msg("注册成功");
 
-        // 2.
-        $("#showLogin").click();
-      });
+      // 2.
+      $("#showLogin").click();
+    });
   });
 
   // ================ 实现登录功能 ================
@@ -88,30 +86,28 @@ $(function () {
     // 表单数据
     let data = $(this).serialize();
 
-    axios
-      .post("http://ajax.frontend.itheima.net/api/login", data)
-      .then((res) => {
-        // console.log(res);
+    axios.post("/api/login", data).then((res) => {
+      // console.log(res);
 
-        if (res.data.status !== 0) {
-          // 登录失败
-          return layer.msg("登录失败");
-        }
+      if (res.data.status !== 0) {
+        // 登录失败
+        return layer.msg("登录失败");
+      }
 
-        /* // 登录成功
+      /* // 登录成功
         layer.msg("登录成功");
         // 跳转页面，跳转到index页面
         location.href = "/index.html"; */
 
-        // 把服务器响应回来的 token 信息给存储到本地存储中（localStorage）
-        localStorage.setItem("token", res.data.token);
+      // 把服务器响应回来的 token 信息给存储到本地存储中（localStorage）
+      localStorage.setItem("token", res.data.token);
 
-        // 以上代码细节优化： layer.msg当它隐藏之后才跳转页面
-        layer.msg("登录成功", function () {
-          // do something
-          // 跳转页面，跳转到index页面
-          location.href = "/index.html";
-        });
+      // 以上代码细节优化： layer.msg当它隐藏之后才跳转页面
+      layer.msg("登录成功", function () {
+        // do something
+        // 跳转页面，跳转到index页面
+        location.href = "/index.html";
       });
+    });
   });
 });
